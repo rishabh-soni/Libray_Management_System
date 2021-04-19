@@ -409,7 +409,7 @@ $(document).on("click", ".action-buttons .dropdown-menu", function(e){
                         <a href="{% url 'profile' %}" class="dropdown-item">Your Profile</a>
                         <a href="{% url 'pshelf' %}" class="dropdown-item">Personal Shelf</a>
                         <a href="{% url 'booksonhold' %}" class="dropdown-item">Books on Hold</a>
-                        <a href="" class="dropdown-item">Your ADs</a>
+                        <a href="{% url 'booksonloan' %}" class="dropdown-item">Books on Loan</a>
                         <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
                     </div>
                 </div>

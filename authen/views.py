@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from books.models import Books
+from books.models import *
 from .forms import *
+import datetime
 from books.models import PShelf
 from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
@@ -15,7 +16,32 @@ from django.contrib.auth import get_user_model
 
 def home(request):
     user = request.user
-    books = Books.objects.order_by('-id').filter(current_status='on-shelf')[:8]
+    tempb = Books.objects.order_by('-id').order_by('isbn_number').filter(current_status='on-shelf')[:8]
+    books = list()
+    x = 0
+    while x < len(tempb):
+        current_isbn = tempb[x].isbn_number
+        flag = 0
+        while tempb[x].isbn_number == current_isbn:
+            if tempb[x].current_status == 'on-shelf' and flag == 0:
+                books.append(tempb[x])
+                flag = 1
+            elif tempb[x].current_status == 'on-loan' and flag == 0:
+                curr_date = datetime.datetime.now()
+                loan_info = Loan.objects.all().filter(tempb[x].bid).first()
+                ret_date = loan_info.return_date
+                dt = ret_date - curr_date
+                if user.is_faculty:
+                    flag = 1
+                    books.append(tempb[x])
+                else:
+                    if dt.days <= 10:
+                        flag = 1
+                        books.append(tempb[x])
+            x += 1
+            if x == len(tempb):
+                break
+
     shelf_list = PShelf.objects.filter(username=user.username)
     ids = list()
     #reco1 = Books.objects.order_by('-id').filter(current_status='on_shelf')[:3]

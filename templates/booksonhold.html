@@ -324,6 +324,14 @@ background-color: #e2e8f0;
                                                class="btn btn-lg btn-primary text-uppercase"
                                                style="background: #FE980F;border: none; "><i
                                                     class="fa fa-info"></i> Explore </a>
+                                             <form action="/deletehold/{{x.id}}" method="post" style="display:inline;">
+                                                {% csrf_token %}
+
+                                                <button class="btn btn-lg btn-primary text-uppercase"
+                                                        style="background: #dc3545;border: none; font-color:'white'"><i
+                                                        class="fa fa-trash"></i> Delete
+                                                </button>
+                                            </form>
                                         </article>
                                     </div>
                                 </div>

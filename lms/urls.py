@@ -37,6 +37,7 @@ urlpatterns = [
                   path('library/category/<slug:category>', bookviews.library, name='library'),
                   # path('buy/confirm/<int:pid>', prodviews.confirm, name='confirm'),
                   path('booksonhold/', bookviews.booksonhold, name='booksonhold'),
+                  path('deletehold/<int:bid>', bookviews.deletehold),
                   path('booksonloan/', bookviews.booksonloan, name='booksonloan'),
                   # path('yourads/', prodviews.yourads, name='yourads'),
                   # path('yourads/<int:pid>', prodviews.deletead),

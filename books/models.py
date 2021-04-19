@@ -1,6 +1,8 @@
 from django.db import models
 from django import forms
 from authen.models import CustomUser
+from datetime import datetime, timezone
+
 
 STATUS_CHOICES = [
     ('on-loan', 'on-loan'),
@@ -68,9 +70,9 @@ class Loan(models.Model):
     isbn_number = models.CharField(max_length=45)
     copy_number = models.IntegerField()
     title = models.CharField(max_length=255)
-    issue_date = models.DateField()
-    return_date = models.DateField(null=True)
-    last_rem_date = models.DateField(null=True)
+    issue_date = models.DateTimeField()
+    return_date = models.DateTimeField(null=True)
+    last_rem_date = models.DateTimeField(null=True, blank=True)
 
 
 class Reviews(models.Model):

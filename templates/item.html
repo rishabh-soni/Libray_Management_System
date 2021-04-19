@@ -214,8 +214,13 @@ function myFunction(){
                     </button>
                     {% else %}
                     {% if user.is_authenticated %}
+                    {% if is_invalid %}
+                    <a href="#myModal1" class="btn btn-lg btn-primary text-uppercase"
+                       style="background: #FE980F;border: none; " data-toggle="modal" disabled>Keep on Hold</a>
+                    {% else %}
                     <a href="#myModal1" class="btn btn-lg btn-primary text-uppercase"
                        style="background: #FE980F;border: none; " data-toggle="modal">Keep on Hold</a>
+                    {% endif %}
                     {% else %}
                     <a href="#myModal3" class="btn btn-lg btn-primary text-uppercase"
                        style="background: #FE980F;border: none; " data-toggle="modal">Keep on Hold</a>
@@ -332,7 +337,7 @@ function myFunction(){
                     <button class="btn btn-success" onclick="myFunction()"><span>Yes!</span>
                         <i class="material-icons">&#xE5C8;</i></button>
                 </a>-->
-                <a href="/library/hold/{{x.id}}" style="text-decoration:none;">
+                <a href="/library/hold/{{book.id}}" style="text-decoration:none;">
                     <button type="button" class="btn btn-success" onclick="myFunction()"><span>Yes!</span>
                         <i class="material-icons">&#xE5C8;</i></button>
                 </a>

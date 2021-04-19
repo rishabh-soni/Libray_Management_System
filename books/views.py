@@ -9,6 +9,8 @@ from django.urls import reverse
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.db.models import Count
+import datetime, pytz
+from datetime import datetime, timezone
 
 
 def book(request, myid):
@@ -17,10 +19,15 @@ def book(request, myid):
     shelf_list = PShelf.objects.filter(username=user.username)
     loan_info = Loan.objects.filter(bid=myid).first()
     reviews = Reviews.objects.filter(isbn_number=book.isbn_number)
+    books_isued = Loan.objects.filter(username=user.username)
+    no_of_books = len(books_isued)
+    is_invalid=0
+    if user.is_faculty==0 and no_of_books>3 and user.unpaid_fines>1000:
+        is_invalid=1
     ids = list()
     for item in shelf_list:
         ids.append(item.bid)
-    return render(request, 'item.html', {'book': book, 'ids': ids, 'loan_info': loan_info, 'reviews': reviews})
+    return render(request, 'item.html', {'book': book, 'ids': ids, 'loan_info': loan_info, 'reviews': reviews, 'is_invalid':is_invalid})
 
 
 def pshelf(request):
@@ -49,26 +56,58 @@ def create_pshelf(request, pid):
 def library(request, category):
     user = request.user
     if category == "all":
-        books = Books.objects.all().filter(current_status='on-shelf') | Books.objects.all().filter(
+        tempb = Books.objects.all().order_by('isbn_number').filter(
+            current_status='on-shelf') | Books.objects.all().order_by('isbn_number').filter(
             current_status='on-loan')
     elif category == "fiction":
-        books = Books.objects.filter(category='Fiction').filter(current_status='on-shelf') | Books.objects.filter(
+        tempb = Books.objects.filter(category='Fiction').order_by('isbn_number').filter(
+            current_status='on-shelf') | Books.objects.order_by('isbn_number').filter(
             category='Fiction').filter(current_status='on-loan')
     elif category == "science":
-        books = Books.objects.filter(category='Science').filter(current_status='on-shelf') | Books.objects.filter(
+        tempb = Books.objects.filter(category='Science').order_by('isbn_number').filter(
+            current_status='on-shelf') | Books.objects.order_by('isbn_number').filter(
             category='Science').filter(current_status='on-loan')
     elif category == "business":
-        books = Books.objects.filter(category='Business').filter(current_status='on-shelf') | Books.objects.filter(
+        tempb = Books.objects.filter(category='Business').order_by('isbn_number').filter(
+            current_status='on-shelf') | Books.objects.order_by('isbn_number').filter(
             category='Business').filter(current_status='on-loan')
     elif category == "biography":
-        books = Books.objects.filter(category='Biography').filter(current_status='on-shelf') | Books.objects.filter(
+        tempb = Books.objects.filter(category='Biography').order_by('isbn_number').filter(
+            current_status='on-shelf') | Books.objects.order_by('isbn_number').filter(
             category='Biography').filter(current_status='on-loan')
     elif category == "literature":
-        books = Books.objects.filter(category='Literature').filter(current_status='on-shelf') | Books.objects.filter(
+        tempb = Books.objects.filter(category='Literature').order_by('isbn_number').filter(
+            current_status='on-shelf') | Books.objects.order_by('isbn_number').filter(
             category='Literature').filter(current_status='on-loan')
     elif category == "others":
-        books = Books.objects.filter(category='Others').filter(current_status='on-shelf') | Books.objects.filter(
+        tempb = Books.objects.filter(category='Others').order_by('isbn_number').filter(
+            current_status='on-shelf') | Books.objects.order_by('isbn_number').filter(
             category='Others').filter(current_status='on-loan')
+    books = list()
+    x = 0
+    while x < len(tempb):
+        current_isbn = tempb[x].isbn_number
+        flag = 0
+        while tempb[x].isbn_number == current_isbn:
+            if tempb[x].current_status == 'on-shelf' and flag == 0:
+                books.append(tempb[x])
+                flag = 1
+            elif tempb[x].current_status == 'on-loan' and flag == 0:
+                curr_date = datetime.now(timezone.utc)
+                loan_info = Loan.objects.all().filter(bid=tempb[x].id).first()
+                ret_date = loan_info.return_date
+                dt = ret_date - curr_date
+                if user.is_faculty:
+                    flag = 1
+                    books.append(tempb[x])
+                else:
+                    if dt.days <= 10:
+                        flag = 1
+                        books.append(tempb[x])
+            x += 1
+            if x == len(tempb):
+                break
+
     reco1 = Books.objects.order_by('-id').filter(current_status='on-shelf')[:3]
     reco2 = Books.objects.order_by('-id').filter(current_status='on-shelf')[3:6]
     shelf_list = PShelf.objects.filter(username=user.username)
@@ -90,11 +129,11 @@ def hold(request, myid):
             hold_limit = hold_date + datetime.timedelta(days=10)
             if user.is_faculty:
                 holdr = Hold(username=user.username, bid=book.id, isbn_number=isbn, copy_number=copy, title=bookname,
-                            hold_date=hold_date)
+                             hold_date=hold_date)
                 holdr.save()
             else:
                 holdr = Hold(username=user.username, bid=book.id, isbn_number=isbn, copy_number=copy, title=bookname,
-                            hold_date=hold_date, hold_limit=hold_limit)
+                             hold_date=hold_date, hold_limit=hold_limit)
                 holdr.save()
             if book.current_status == 'on-shelf':
                 book.current_status = 'on-hold'
@@ -115,6 +154,19 @@ def booksonhold(request):
         ids.append(x.bid)
     books = Books.objects.filter(id__in=ids)
     return render(request, 'booksonhold.html', {'books': books, 'hold': hold})
+
+
+def deletehold(request, bid):
+    user = request.user
+    username = user.username
+    book = Books.objects.filter(id=bid).first()
+    if book.current_status == 'on-loan-and-on-hold':
+        book.current_status = 'on-loan'
+    else:
+        book.current_status = 'on-shelf'
+    book.save()
+    Hold.objects.filter(bid=bid).delete()
+    return redirect(request.META.get('HTTP_REFERER', 'redirect_if_referer_not_found'))
 
 
 def booksonloan(request):
@@ -138,12 +190,13 @@ def review(request, bid):
             rating.username = user.username
             rating.isbn_number = book.isbn_number
             rating.save()
-            r = '/library/book/'+str(bid)
+            r = '/library/book/' + str(bid)
             return redirect(r)
     else:
         form = Review()
         book = Books.objects.filter(id=bid).first()
         return render(request, 'review.html', {'form': form, 'book': book})
+
 
 """
 
