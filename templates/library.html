@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% block title %}
+Library
+{% endblock title %}
+{% block head %}
+<link href="/static/buy/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/buy/css/font-awesome.min.css" rel="stylesheet">
+<link href="/static/buy/css/price-range.css" rel="stylesheet">
+<link href="/static/buy/css/animate.css" rel="stylesheet">
+<link href="/static/buy/css/main.css" rel="stylesheet">
+<link href="/static/buy/css/responsive.css" rel="stylesheet">
+<style>
+    .product-image-wrapper:hover{
+        -webkit-box-shadow: 0 7px 7px 0 rgba(0,0,0,0.10),0 0px 15px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 7px 7px 0 rgba(0,0,0,0.10),0 0px 15px 0 rgba(0,0,0,0.3);
+    }
+
+
+
+
+
+</style>
+{% endblock head %}
+
+{% block content %}
+<section id="slider"><!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#slider-carousel" data-slide-to="1"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-sm-6">
+                                <h1>Honey<span>Comb</span>LMS</h1>
+                                <h2>Satisfy the book worm within you!</h2>
+                                <p>Keep a book on hold and collect it from one of our offline libraries.</p>
+                                <a href="/library/category/all" ><button type="button" class="btn btn-default get">Browse All Books</button></a>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="/static/buy/images/home/hostel2.jpg" class="img-responsive" alt="" style="width:auto max-height:400px; display: block; position: relative; top: 50%;transform: translateY(0%);max-width:400px; margin-left: auto; margin-right: auto; margin-top:10px;"/>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="col-sm-6">
+                                <h1>Honey<span>Comb</span>LMS</h1>
+                                <h2>Share with your friends what you are reading!</h2>
+                                <p></p>
+                                <a href="" ><button type="button" class="btn btn-default get">Some Link</button></a>
+                            </div>
+                            <div class="col-sm-6">
+                                <img src="/static/buy/images/home/hostel3.jpg" class="img-responsive" alt="" style="width:auto max-height:400px; display: block; position: relative; top: 50%;transform: translateY(0%);max-width:400px; margin-left: auto; margin-right: auto; margin-top:10px;"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Category</h2>
+                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/library/category/all">All Categories</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/library/category/fiction">Fiction</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/library/category/business">Business</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/library/category/biography">Biography</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/library/category/science">Science</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/library/category/literature">Library</a></h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a href="/library/category/others">Others</a></h4>
+                            </div>
+                        </div>
+                    </div><!--/category-books-->
+
+                    <!--<div class="price-range">
+                        <h2>Price Range</h2>
+                        <div class="well text-center">
+                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
+                                   data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br/>
+                            <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items"><!--features_items-->
+                    <h2 class="title text-center">Books in Library</h2>
+                    {% for x in books %}
+                    <div class="col-sm-4">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <div style="height:300px;"><a
+                                            href="/library/book/{{x.id}} "><img src="/media/{{ x.Img1 }}"
+                                                                               alt="" class="card-img-top"
+                                                                               style="width:auto max-height:300px; display: block; position: relative; top: 50%;transform: translateY(-50%);max-width:220px; margin-left: auto; margin-right: auto; margin-top:10px;"/></a>
+                                    </div>
+                                    <h2>{{x.author}}</h2>
+                                    <p>{{x.title}}</p>
+                                    <a href="/library/book/{{x.id}}" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-book"></i>Explore
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="choose" style="width:100%; text-align:center;">
+                                <form action="/pshelf/{{x.id}}" method="post" style="display:inline">
+                                    {% csrf_token %}
+                                    {% if user.is_authenticated %}
+                                    {% if x.id in ids %}
+                                    <button type="submit" class="btn"><i
+                                            class="fa fa-trash"></i> Remove from your Shelf
+                                    </button>
+                                    {% else %}
+                                    <button type="submit" class="btn"><i
+                                            class="fa fa-plus-square"></i> Add to your Shelf
+                                    </button>
+                                    {% endif %}
+                                    {% else %}
+                                    <button type="submit" class="btn" disabled><i
+                                            class="fa fa-plus-square"></i> Add to your Shelf
+                                    </button>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div><!--features_items-->
+
+                <div class="recommended_items"><!--recommended_items-->
+                    <h2 class="title text-center">Recommended Books</h2>
+
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                {% for y in reco1 %}
+                                <div class="col-sm-4" style="margin-top:20px;">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="/media/{{ y.Img1 }}" alt="" class="card-img-top"
+                                                     style="width:auto; height:150px;display: block; max-width:250px;
+                                                          margin-left: auto;
+                                                          margin-right: auto; margin-top:10px;"/>
+                                                <h2>{{y.author}}</h2>
+                                                <p>{{y.title}}</p>
+                                                <a href="/library/book/{{y.id}}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-book"></i>Explore
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="item">
+                                {% for y in reco2 %}
+                                <div class="col-sm-4" style="margin-top:20px;">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="/media/{{ y.Img1 }}" alt="" class="card-img-top"
+                                                     style="width:auto; height:150px;display: block; max-width:250px;
+                                                          margin-left: auto;
+                                                          margin-right: auto; margin-top:10px;"/>
+                                                <h2>{{y.author}}</h2>
+                                                <p>{{y.title}}</p>
+                                                <a href="/library/book/{{y.id}}" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-explore"></i>Explore
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div><!--/recommended_items-->
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="/static/buy/js/jquery.js"></script>
+<script src="/static/buy/js/bootstrap.min.js"></script>
+<script src="/static/buy/js/jquery.scrollUp.min.js"></script>
+<script src="/static/buy/js/price-range.js"></script>
+<script src="/static/buy/js/jquery.prettyPhoto.js"></script>
+<script src="/static/buy/js/main.js"></script>
+{% endblock content %}

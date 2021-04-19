@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+{%block title%} About Us {%endblock title%}
+{%block content%}
+
+<div class="bg-light">
+    <div class="container py-5">
+        <div class="row h-100 align-items-center py-5">
+            <div class="col-lg-6">
+                <h1 class="display-4">Vision</h1>
+                <p class="lead text-muted mb-0" style="text-align:justify">Through our experience we know that buying or selling stuff is
+                    generally an ordeal for college students, so we have come up with a solution for that!<br>
+                    Students can now easily sell the things they no longer need to others and can also buy useful things with just a few clicks using honeycomb.<br>
+                    Also people can wishlist the products for future reference or request for products they need!
+                </p>
+                <!--<p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted">
+                    <u>Bootstrapious</u></a>-->
+                </p>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block"><img
+                    src="/static/images/office.png" alt=""
+                    class="img-fluid" style='margin: 0px 0px 0px 80px'></div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white py-5">
+    <div class="container py-5">
+        <div class="row align-items-center mb-5">
+           <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-users fa-2x mb-3 text-primary"></i>
+                <h2 class="font-weight-light">Who we are?</h2>
+                <p class="text-muted mb-4" style="text-align:justify">We are a group of Computer Science Undergraduates from IIT Indore.<br>
+                We have started HoneyComb as a course project with the basic idea to create
+                    a website which can solve the most common problems students face during their college life which is buying and selling things.<br></p><!--<a href="#"
+                                                                                      class="btn btn-light px-5 rounded-pill shadow-sm">Learn
+                    More</a>-->
+            </div>
+            <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img
+                    src="/static/images/working.png" alt=""
+                    class="img-fluid mb-4 mb-lg-0"></div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-lg-5 px-5 mx-auto"><img
+                    src="/static/images/laptop.png" alt=""
+                    class="img-fluid mb-4 mb-lg-0"></div>
+            <div class="col-lg-6"><i class="fa fa-github fa-2x mb-3 text-primary"></i>
+                <h2 class="font-weight-light">Join us now!</h2>
+                <p class="text-muted mb-4">Want to contribute?<br>
+                    HoneyComb is an open source project so if you like our concept and want to join, click the button below!  </p><a href="{% url 'contactus' %}"
+                                                                                      class="btn btn-light px-5 rounded-pill shadow-sm">Contact Us</a>
+                <a href="https://github.com/rishabh-soni/Online_Resource_Sharing_Platform" target="_blank" class="btn btn-light px-5 rounded-pill shadow-sm">Git Hub Repo</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="bg-light">
+    <div class="container py-4">
+        <div class="row mb-4">
+            <div class="col-lg-5">
+                <h2 class="display-4 font-weight-light">Our team</h2>
+            </div>
+        </div>
+
+        <div class="row text-center" >
+            <!-- Team item-->
+            <div class="col-xl-2 col-sm-6 mb-5" style="margin:0px 10px 0px 10px">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                        src="/static/images/img1.jpeg" alt=""
+                        width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Saket Kumar</h5><span
+                            class="small text-uppercase text-muted"> Founder</span>
+                    <ul class="social mb-0 list-inline mt-3">
+                      <!--  <li class="list-inline-item"><a href="#" class="social-link"><i
+                                class="fa fa-aboutus fa-facebook-f"></i></a></li>-->
+                        <li class="list-inline-item"><a target="_blank" href="https://github.com/Saket-07" class="social-link"><i class="fa fa-aboutus fa-github"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a target="_blank" href="https://www.instagram.com/saket_kumar18/" class="social-link"><i class="fa fa-aboutus fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a target="_blank" href="#" class="social-link"><i class="fa fa-aboutus fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End-->
+             <div class="col-xl-2 col-sm-6 mb-5" style="margin:0px 10px 0px 10px">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                        src="/static/images/img2.jpeg" alt=""
+                        width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Rishabh Soni</h5><span
+                            class="small text-uppercase text-muted">Founder</span>
+                    <ul class="social mb-0 list-inline mt-3">
+                       <!-- <li class="list-inline-item"><a href="#" class="social-link"><i
+                                class="fa fa-aboutus fa-facebook-f"></i></a></li>-->
+                       <li class="list-inline-item"><a  target="_blank" href="https://github.com/rishabh-soni" class="social-link"><i class="fa fa-aboutus fa-github"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a target="_blank"  href="https://www.instagram.com/rishabh.rs.001/" class="social-link"><i class="fa fa-aboutus fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a target="_blank" href="https://www.linkedin.com/in/rishabhrs001" class="social-link"><i class="fa fa-aboutus fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Team item-->
+            <div class="col-xl-2 col-sm-6 mb-5" style="margin:0px 10px 0px 10px">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                        src="/static/images/img3.jpeg" alt=""
+                        width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Rahul Mahbubani</h5><span class="small text-uppercase text-muted"> Founder</span>
+                    <ul class="social mb-0 list-inline mt-3">
+                       <!-- <li class="list-inline-item"><a href="#" class="social-link"><i
+                                class="fa fa-aboutus fa-facebook-f"></i></a></li>-->
+                        <li class="list-inline-item"><a target="_blank" href="https://github.com/rahulmah80" class="social-link"><i class="fa fa-aboutus fa-github"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a target="_blank" href="https://www.instagram.com/rahulmahbubani80/" class="social-link"><i class="fa fa-aboutus fa-instagram"></i></a>
+                        </li>
+                        <!--<li class="list-inline-item"><a target="_blank" href="#" class="social-link"><i class="fa fa-aboutus fa-linkedin"></i></a>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+            <!-- End-->
+
+            <!-- Team item-->
+            <div class="col-xl-2 col-sm-6 mb-5" style="margin:0px 10px 0px 10px">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                        src="/static/images/img4.jpg" alt=""
+                        width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Yash Suvarna</h5><span
+                            class="small text-uppercase text-muted">Founder</span>
+                    <ul class="social mb-0 list-inline mt-3">
+                        <!--<li class="list-inline-item"><a href="#" class="social-link"><i
+                                class="fa fa-aboutus fa-facebook-f"></i></a></li>
+                       <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-aboutus fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="#" target="_blank" class="social-link"><i class="fa fa-aboutus fa-instagram"></i></a>
+                        </li>-->
+                        <li class="list-inline-item"><a href="www.linkedin.com/in/yash-suvarna-858477199/" target="_blank" class="social-link"><i class="fa fa-aboutus fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End-->
+
+            <!-- Team item-->
+            <div class="col-xl-2 col-sm-6 mb-5" style="margin:0px 10px 0px 10px">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img
+                        src="/static/images/img5.jpg" alt=""
+                        width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Shivesh Dave</h5><span class="small text-uppercase text-muted"> Founder</span>
+                    <ul class="social mb-0 list-inline mt-3">
+                       <!-- <li class="list-inline-item"><a href="#" class="social-link"><i
+                                class="fa fa-aboutus fa-facebook-f"></i></a></li>
+                       <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-aboutus fa-twitter"></i></a>
+                        </li>-->
+                        <li class="list-inline-item"><a href="https://www.instagram.com/dave_shivesh/" target="_blank" class="social-link"><i class="fa fa-aboutus fa-instagram"></i></a>
+                        </li>
+                        <!--<li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-aboutus fa-linkedin"></i></a>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+            <!-- End-->
+        </div>
+    </div>
+</div>
+
+{%endblock content%}

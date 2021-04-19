@@ -1,0 +1,386 @@
+{% extends 'base.html' %}
+{% block title %}
+
+{{book.title}}
+
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+
+.modal-confirm {
+	color: #434e65;
+	width: 525px;
+}
+
+.modal-confirm .modal-content {
+	padding: 20px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-confirm .modal-header {
+	background: #47c9a2;
+	border-bottom: none;
+	position: relative;
+	text-align: center;
+	margin: -20px -20px 0;
+	border-radius: 5px 5px 0 0;
+	padding: 35px;
+}
+.modal-header-cart {
+	background: #FE980F;
+	border-bottom: none;
+	position: relative;
+	text-align: center;
+	margin: -20px -20px 0;
+	border-radius: 5px 5px 0 0;
+	padding: 35px;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 36px;
+	margin: 10px 0;
+}
+.modal-confirm .form-control, .modal-confirm .btn {
+	min-height: 40px;
+	border-radius: 3px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	color: #fff;
+	text-shadow: none;
+	opacity: 0.5;
+}
+.modal-confirm .close:hover {
+	opacity: 0.8;
+}
+.modal-confirm .icon-box {
+	color: #fff;
+	width: 95px;
+	height: 95px;
+	display: inline-block;
+	border-radius: 50%;
+	z-index: 9;
+	border: 5px solid #fff;
+	padding: 15px;
+	text-align: center;
+}
+.modal-confirm .icon-box i {
+	font-size: 64px;
+	margin: -4px 0 0 -4px;
+}
+.modal-confirm.modal-dialog {
+	margin-top: 80px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #eeb711 !important;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border-radius: 30px;
+	margin-top: 10px;
+	padding: 6px 20px;
+	border: none;
+}
+.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+	background: #eda645 !important;
+	outline: none;
+}
+.modal-confirm .btn span {
+	margin: 1px 3px 0;
+	float: left;
+}
+.modal-confirm .btn i {
+	margin-left: 1px;
+	font-size: 20px;
+	float: right;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
+.modal-open{
+  padding:0 !important;
+  overflow-y: auto;
+ }
+body:not(.modal-open){
+  padding-right: 0px !important;
+}
+.carousel-item {
+height: 450px;
+}
+
+.carousel-item img {
+max-height: 100%;
+max-width: 100%;
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+margin: auto;
+}
+
+.border-right {
+margin:0px;
+
+}
+
+
+
+
+
+
+
+</style>
+<script>
+function myFunction(){
+    $("#myModal2").modal();
+}
+
+
+
+
+
+
+
+
+
+
+
+</script>
+{% endblock head %}
+{% block content %}
+
+<div class="container">
+    <br><br>
+    <div class="card">
+        <div class="row">
+            <aside class="col-sm-5 ">
+                <article class="gallery-wrap">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        </ol>
+                        <div class="carousel-inner border-right">
+                            <div class="carousel-item active">
+                                <img src="/media/{{book.Img1}}" class="d-block"
+                                     style="max-height:430px; height:auto; max-width:400px">
+                            </div>
+                        </div>
+                    </div>
+                </article> <!-- gallery-wrap .end// -->
+            </aside>
+            <aside class="col-sm-7">
+                <article class="card-body p-5">
+                    <h3 class="title mb-3">{{book.title}}</h3>
+                    <p class="price-detail-wrap">
+                    </p> <!-- price-detail-wrap .// -->
+                    <dl class="item-property">
+                        <dt>Author</dt>
+                        <dd><p>{{book.author}} </p></dd>
+                    </dl>
+                    <dl class="param param-feature">
+                        <dt>Year of Publication</dt>
+                        <dd>{{book.year_of_publication}}</dd>
+                    </dl>
+                    <dl class="param param-feature">
+                        <dt>Current Status</dt>
+                        <dd>{{book.current_status}}</dd>
+                    </dl>
+                    {% if book.current_status == 'on-loan' %}
+                    <dl class="param param-feature">
+                        <dt>Expected Return Date</dt>
+                        <dd>{{loan_info.return_date}}</dd>
+                    </dl>
+                    {% endif %}
+                    {% if book.current_status == 'on-hold' or book.current_status == 'on-loan-and-on-hold' %}
+                    <button class="btn btn-lg btn-primary text-uppercase"
+                            style="background: #FE980F;border: none; " disabled>Already on Hold
+                    </button>
+                    {% else %}
+                    {% if user.is_authenticated %}
+                    <a href="#myModal1" class="btn btn-lg btn-primary text-uppercase"
+                       style="background: #FE980F;border: none; " data-toggle="modal">Keep on Hold</a>
+                    {% else %}
+                    <a href="#myModal3" class="btn btn-lg btn-primary text-uppercase"
+                       style="background: #FE980F;border: none; " data-toggle="modal">Keep on Hold</a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    {% if x.id not in ids %}
+                    <a href="/pshelf/{{book.id}}" class="btn btn-lg btn-primary text-uppercase"
+                       style="background: #dc3545;border: none; font-color:'white'"> <i
+                            class="fa fa-heart-o"></i> Add to Your Shelf</a>
+                    {% else %}
+                    <a href="/pshelf/{{book.id}}" class="btn btn-lg btn-primary text-uppercase"
+                       style="background: #dc3545;border: none; font-color:'white'"> <i
+                            class="fa fa-heart"></i> Remove from Your Shelf</a>
+                    {% endif %}
+                    <br><br>
+                    <a href="/review/{{book.id}}" class="btn btn-lg btn-primary text-uppercase"
+                       style="background: #4287f5;border: none; font-color:'white'"> <i
+                            class="fa fa-star"></i> Review this book</a>
+                    {% else %}
+                    <button class="btn btn-lg btn-primary text-uppercase"
+                            style="background: #dc3545;border: none; font-color:'white'" disabled><i
+                            class="fa fa-heart-o"></i> Add to Your Shelf
+                    </button>
+                    <br><br>
+                    <button class="btn btn-lg btn-primary text-uppercase"
+                            style="background: #4287f5;border: none; font-color:'white'" disabled><i
+                            class="fa fa-star"></i> Review
+                    </button>
+                    {% endif %}
+                    {% endif %}
+                </article> <!-- card-body.// -->
+            </aside> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div> <!-- card.// -->
+    <br>
+    {% if reviews|length != 0 %}
+    <h3 class="title mb-3">Reviews</h3>
+    {% endif %}
+    <div class="col-lg-12" >
+        {% for x in reviews %}
+        <div class="card" style="margin-bottom: 10px;">
+            <div class="card-body" >
+                <!-- Card Start -->
+                <div class="" style="width: 100%;">
+                    <div class="row">
+                        <div class="" style="margin-left: 10px;">
+                            <div class="card-block px-8">
+                                <article class="p-1">
+                                    <h4 class="title mb-3">By {{x.username}}</h4>
+                                    <dl class="item-property">
+                                        <dt>Rating</dt>
+                                        <dd>{{x.rating}}</dd>
+                                    </dl>
+                                    <dl class="param param-feature">
+                                        <dt>Review</dt>
+                                        <dd>{{x.review}}</dd>
+                                    </dl>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!--<div id="myModal{{x.id}}" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header-cart justify-content-center">
+                <div class="icon-box">
+                    <i class="material-icons">add_shopping_cart</i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                {% if x.id in prolist %}
+                <p>Select the user who bought this product:</p>
+                <form method="post" action="/buy/confirm/{{x.id}}">
+                    {% csrf_token %}
+                    <select id="buyer" name="buyer" class="form-control">
+                        {% for request in requests %}
+                        {% if request.pid == x.id %}
+                        <option value="{{request.buyer}}">{{request.buyer}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-success">Mark as sold</button>
+                </form>
+                {% else %}
+                <p>You have no requests for this product.</p>
+                {% endif %}
+                <button class="btn btn-success" data-dismiss="modal"><span>Go Back</span> <i
+                        class="material-icons">&#xE5C8;</i></button>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--container.//-->
+<div id="myModal1" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header-cart justify-content-center">
+                <div class="icon-box">
+                    <i class="material-icons">add_shopping_cart</i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Confirm Hold?</h4>
+                <p>A copy of this book will be kept on hold.</p>
+                <!--<a href="#myModal2" data-dismiss="modal" data-toggle="modal" style="text-decoration:none;">
+                    <button class="btn btn-success" onclick="myFunction()"><span>Yes!</span>
+                        <i class="material-icons">&#xE5C8;</i></button>
+                </a>-->
+                <a href="/library/hold/{{x.id}}" style="text-decoration:none;">
+                    <button type="button" class="btn btn-success" onclick="myFunction()"><span>Yes!</span>
+                        <i class="material-icons">&#xE5C8;</i></button>
+                </a>
+                <button class="btn btn-success" data-dismiss="modal"><span>No, not now.</span> <i
+                        class="material-icons">&#xE5C8;</i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal2" class="modal">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <div class="icon-box">
+                    <i class="material-icons">&#xE876;</i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Success!</h4>
+                <p>You have successfully kept this book on hold. {% if user.is_faculty == 0 %}You have 10
+                    days to collect the book from library and issue it.{% endif %}</p>
+                <!--<p>You can also contact him through his Phone Number: .</p>-->
+                <!--<button class="btn btn-success" data-dismiss="modal"><span>Explore More</span> <i
+                        class="material-icons">&#xE5C8;</i></button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="myModal3" class="modal fade">
+    <div class="modal-dialog modal-confirm">
+        <div class="modal-content">
+            <div class="modal-header-cart justify-content-center">
+                <div class="icon-box">
+                    <i class="fa fa-exclamation"></i>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body text-center">
+                <h4>Login to continue</h4>
+                <p>To send a buy request, you need to be logged in.</p>
+                <!--<p>You can also contact him through his Phone Number: .</p>-->
+                <!--<button class="btn btn-success" data-dismiss="modal"><span>Explore More</span> <i
+                        class="material-icons">&#xE5C8;</i></button>-->
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br>
+
+{% endblock content %}

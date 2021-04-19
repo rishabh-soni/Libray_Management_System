@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> {% block title %}
+        {% endblock title %}</title>
+    <link rel="icon" type="image/png" href="/static/images/icons/favicon.png"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
+
+    {% block head %}
+    {% endblock head %}
+
+    <style>
+
+body {
+	font-family: 'Varela Round', sans-serif;
+}
+h4 {
+    font-family: 'Varela Round', sans-serif;
+    color:#403f3c;
+}
+.form-control {
+	box-shadow: none;
+	font-weight: normal;
+	font-size: 13px;
+}
+.navbar {
+	background: #fff;
+	padding-left: 16px;
+	padding-right: 16px;
+	border-bottom: 1px solid #dfe3e8;
+	border-radius: 0;
+}
+.nav-link img {
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	margin: -8px 0;
+	float: left;
+	margin-right: 10px;
+}
+.navbar .navbar-brand {
+	padding-left: 0;
+	font-size: 20px;
+	padding-right: 50px;
+}
+.navbar .navbar-brand b {
+	color: #FE980F;
+}
+.navbar .form-inline {
+	display: inline-block;
+}
+.navbar a {
+	color: #888;
+	font-size: 15px;
+}
+.search-box {
+	position: relative;
+}
+.search-box input {
+	padding-right: 35px;
+	border-color: #dfe3e8;
+	border-radius: 4px !important;
+	box-shadow: none
+}
+.search-box .input-group-text {
+	min-width: 35px;
+	border: none;
+	background: transparent;
+	position: absolute;
+	right: 0;
+	z-index: 9;
+	padding: 7px;
+	height: 100%;
+}
+.search-box i {
+	color: #a0a5b1;
+	font-size: 19px;
+}
+.navbar .sign-up-btn {
+	min-width: 110px;
+	max-height: 36px;
+}
+.navbar .dropdown-menu {
+	color: #999;
+	font-weight: normal;
+	border-radius: 1px;
+	border-color: #e5e5e5;
+	box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.navbar a, .navbar a:active {
+	color: #888;
+	padding: 5px 20px;
+	background: transparent;
+	line-height: normal;
+}
+.navbar .navbar-form {
+	border: none;
+}
+.navbar .action-form {
+	width: 280px;
+	padding:20px;
+	left: auto;
+	right: 0;
+	font-size: 14px;
+}
+.navbar .action-form a {
+	color: #FE980F;
+	padding: 0 !important;
+	font-size: 14px;
+}
+.navbar .action-form .hint-text {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+.navbar .btn-primary, .navbar .btn-primary:active {
+	color: #fff;
+	background: #FE980F !important;
+	border: none;
+}
+.navbar .btn-primary:hover, .navbar .btn-primary:focus {
+	color: #fff;
+	background: #d19e15 !important;
+}
+.navbar .social-btn .btn, .navbar .social-btn .btn:hover {
+	color: #fff;
+	margin: 0;
+	padding: 0 !important;
+	font-size: 13px;
+	border: none;
+	transition: all 0.4s;
+	text-align: center;
+	line-height: 34px;
+	width: 47%;
+	text-decoration: none;
+}
+.navbar .social-btn .facebook-btn {
+	background: #507cc0;
+}
+.navbar .social-btn .facebook-btn:hover {
+	background: #4676bd;
+}
+.navbar .social-btn .twitter-btn {
+	background: #64ccf1;
+}
+.navbar .social-btn .twitter-btn:hover {
+	background: #4ec7ef;
+}
+.navbar .social-btn .btn i {
+	margin-right: 5px;
+	font-size: 16px;
+	position: relative;
+	top: 2px;
+}
+
+
+
+.or-seperator {
+	margin-top: 32px;
+	text-align: center;
+	border-top: 1px solid #e0e0e0;
+}
+.or-seperator b {
+	color: #666;
+	padding: 0 8px;
+	width: 30px;
+	height: 30px;
+	font-size: 13px;
+	text-align: center;
+	line-height: 26px;
+	background: #fff;
+	display: inline-block;
+	border: 1px solid #e0e0e0;
+	border-radius: 50%;
+	position: relative;
+	top: -15px;
+	z-index: 1;
+}
+.navbar .action-buttons .dropdown-toggle::after {
+	display: none;
+}
+.form-check-label input {
+	position: relative;
+	top: 1px;
+}
+@media (min-width: 1200px){
+	.form-inline .input-group {
+		width: 300px;
+		margin-left: 30px;
+	}
+}
+@media (max-width: 768px){
+	.navbar .dropdown-menu.action-form {
+		width: 100%;
+		padding: 10px 15px;
+		background: transparent;
+		border: none;
+	}
+	.navbar .form-inline {
+		display: block;
+	}
+	.navbar .input-group {
+		width: 100%;
+	}
+
+}
+.dropdown:hover .dropdown-menu {display: block;}
+.dropdown-menu a:hover {background-color: #ddd;}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+.carousel-item {
+   .col, .col-sm, .col-md {
+      margin: 8px;
+      height: 300px;
+      background-size: cover;
+      background-position: center center;
+   }
+}
+footer h6 {
+    margin-bottom: 40px;
+    position: relative;
+}
+footer h6:after {
+    position: absolute;
+    content: "";
+    background: grey;
+    width: 12%;
+    height: 1px;
+    left: 0;
+    bottom: -20px;
+}
+     .btn-footer {
+                 color: white;
+
+                text-decoration: none;
+                border: 1px solid;
+                border-radius: 43px;
+                font-size: 13px;
+                padding: 7px 30px;
+                line-height: 47px;
+     }
+     .btn-footer:hover {
+                color:#FE980F;
+                text-decoration: none;
+
+     }
+     .footer-link{
+        color: white;
+    }
+     .footer-link:hover {
+                color:#FE980F;
+                text-decoration: none;
+    }
+    .form-footer input[type="text"] {
+        border: none;
+    border-radius: 16px 0 0 16px;
+    outline: none;
+    padding-left: 10px;
+
+}
+
+ .form-footer input[type="button"] {
+    border: none;
+    background:#232323;
+        margin-left: 0px;
+    color: #fff;
+    outline: none;
+    border-radius: 0 16px 16px 0;
+    padding: 2px 12px;
+}
+   .fa-aboutus {
+    color: #403f3c;
+    font-size: 19px;
+    padding: 5px 2px;
+    background: #00;
+    }
+     .social .fa-footer {
+    color: #FE980F;
+    font-size: 22px;
+    padding: 5px 5px;
+    background: #00;
+}
+     footer ul li {
+    list-style: none;
+    display: block;
+}
+  footer ul  {
+   padding-left: 0;
+}
+footer ul  li a{
+  text-drecoration: none;
+  color: white;
+  text-decoration:none;
+}
+.logo-part {
+    border-right: 1px solid grey;
+    height: 100%;
+    }
+
+footer {
+
+     }
+     .bg-grey {
+        background: #403f3c;
+     }
+     .logo-footer {
+        margin-bottom: 40px;
+     }
+     footer {
+            color: white;
+     }
+     footer p, a {
+    font-size: 13px;
+
+}
+footer a.text-light:hover { color: #FE980F!important; text-decoration: none; }
+footer .cizgi { border-right: 1px solid #535e67; }
+@media (max-width: 992px) { footer .cizgi { border-right: none; } }
+
+
+
+
+
+    </style>
+    <script>
+// Prevent dropdown menu from closing when click inside the form
+$(document).on("click", ".action-buttons .dropdown-menu", function(e){
+	e.stopPropagation();
+});
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <a href="{% url 'home' %}" class="navbar-brand"><img src="/static/images/icons/icon.png"
+                                                         style="width:30px;height:40px;"> Honey<b>Comb</b>LMS</a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-start">
+        <div class="navbar-nav">
+            <a href="{% url 'home'%}"
+               class="nav-item nav-link {% if request.path == '/' %} active {% endif %} ">Home</a>
+            <div class="nav-item dropdown">
+                <a href="#" data-toggle="dropdown"
+                   class="nav-item nav-link dropdown-toggle {% if '/library/book/' in request.path or '/library/category/' in request.path%} active {% endif %} ">Library</a>
+                <div class="dropdown-menu">
+                    <a href="/library/category/all" class="dropdown-item">All Categories</a>
+                    <a href="/library/category/fiction" class="dropdown-item">Fiction</a>
+                    <a href="/library/category/science" class="dropdown-item">Science</a>
+                    <a href="/library/category/business" class="dropdown-item">Business</a>
+                    <a href="/library/category/biography" class="dropdown-item">Biography</a>
+                    <a href="/library/category/literature" class="dropdown-item">Literature</a>
+                    <a href="/library/category/others" class="dropdown-item">Others</a>
+                </div>
+            </div>
+            <!--<a href=""
+               class="nav-item nav-link {% if request.path == '/aboutus/' %} active {% endif %} ">About</a>
+
+            <a href=""
+               class="nav-item nav-link {% if request.path == '/sell/' %} active {% endif %} ">Sell</a>
+            <a href=""
+               class="nav-item nav-link {% if request.path == '/contact-us/' %} active {% endif %} ">Contact us</a>-->
+
+        </div>
+        <form class="navbar-form form-inline" method="post" action="/buy/search/">
+            {% csrf_token %}
+            <div class="input-group search-box">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Search here...">
+                <div class="input-group-append">
+					<span class="input-group-text">
+                        <button type="submit" style="background: none; border: none; color: grey; "><i
+                                class="fa fa-search" style="font-size: 15px"></i></button>
+					</span>
+                </div>
+            </div>
+        </form>
+        <div class="navbar-nav ml-auto ">
+            {% if user.is_authenticated %}
+            <div class="navbar-nav">
+
+                <div class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-item nav-link dropdown-toggle" style="">
+                        Hi, {{user.full_name}}</a>
+                    <div class="dropdown-menu">
+                        <a href="{% url 'profile' %}" class="dropdown-item">Your Profile</a>
+                        <a href="{% url 'pshelf' %}" class="dropdown-item">Personal Shelf</a>
+                        <a href="{% url 'booksonhold' %}" class="dropdown-item">Books on Hold</a>
+                        <a href="" class="dropdown-item">Your ADs</a>
+                        <a href="{% url 'logout' %}" class="dropdown-item">Logout</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <a href="{% url 'login' %}"
+               class="nav-item nav-link ">Login/Signup</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% block content %}
+{% endblock content %}
+<br><br>
+<footer>
+    <div class="jumbotron jumbotron-fluid bg-grey p-4 mt-5 mb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+                    <div class="card bg-grey border-0">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-white display-4" style="font-size:25px">Get in Touch</h5>
+                            <a class="text-light d-block lead" href=""><i
+                                    class="fa fa-info mr-2" style="color:#FE980F;"></i>About Us</a>
+                            <a class="text-light d-block lead" href=""><i
+                                    class="fa fa-envelope mr-2" style="color:#FE980F;"></i>Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+                    <div class="card bg-grey border-0">
+                        <div class="card-body text-center">
+                            <h5 class="card-title text-white display-4" style="font-size:25px">Follow Us</h5>
+                            <a href="https://www.youtube.com/watch?v=DX1PoINAlD4&t=707s" target="_blank"><i
+                                    class="fa fa-youtube-square fa-fw fa-2x" style="color:#FE980F;"></i></a>
+
+                            <!--<a class="text-light" href="#"><i class="fa fa-facebook-square fa-fw fa-2x"
+                                                              style="color:#FE980F;"></i></a>
+
+                            <a class="text-light" href="#"><i class="fa fa-instagram fa-fw fa-2x"
+                                                              style="color:#FE980F;"></i></a>-->
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
+                    <div class="card bg-grey border-0">
+                        <div class="" style="text-align:center"><br>
+                            <img src="/static/images/icons/logo_white2.png" style="width:48%; margin-top:-20px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--
+<footer class="container-fluid bg-grey py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="logo-part" style="text-align:center"><br>
+                    <img src="/static/images/icons/logo_white.png" class="w-50">
+                </div>
+            </div>
+            <div class="col-md-3" style="text-align:center;  border-right: 1px solid grey;"><br>
+                <h5> About Us</h5>
+                <a href="" class="btn-footer"> More Info </a><br>
+                <a href="" class="btn-footer"> Contact Us</a>
+            </div>
+            <div class="col-md-3" style="text-align:center;  border-right: 1px solid grey;"><br>
+                <h5> Quick Links</h5>
+                <ul>
+                    <li><a href="{% url 'home' %}" class="footer-link"> Home</a></li>
+                    <li><a href="" class="footer-link"> Sell</a></li>
+                    <li><a href="" class="footer-link"> Wishlist</a></li>
+                </ul>
+            </div>
+
+
+            <div class="col-md-3 " style="text-align:center;"><br>
+                <h5> Follow Us</h5>
+                <div class="social">
+                    <a href="#"><i class="fa-footer fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa-footer fa fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container text-center">
+         <p class=" text-light mb-0">&copy; Copyrights HoneyComb.com All rights reserved.</p>
+    </div>
+</footer>-->
+</body>
+</html>

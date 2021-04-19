@@ -1,0 +1,358 @@
+{% extends 'base.html' %}
+{% block title %}
+Your Wishlist
+{% endblock title %}
+{% block head %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+.modal-confirm {
+	color: #434e65;
+	width: 525px;
+}
+
+.modal-confirm .modal-content {
+	padding: 20px;
+	font-size: 16px;
+	border-radius: 5px;
+	border: none;
+}
+.modal-confirm .modal-header {
+	background: #47c9a2;
+	border-bottom: none;
+	position: relative;
+	text-align: center;
+	margin: -20px -20px 0;
+	border-radius: 5px 5px 0 0;
+	padding: 35px;
+}
+.modal-header-cart {
+	background: #FE980F;
+	border-bottom: none;
+	position: relative;
+	text-align: center;
+	margin: -20px -20px 0;
+	border-radius: 5px 5px 0 0;
+	padding: 35px;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 36px;
+	margin: 10px 0;
+}
+.modal-confirm .form-control, .modal-confirm .btn {
+	min-height: 40px;
+	border-radius: 3px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	color: #fff;
+	text-shadow: none;
+	opacity: 0.5;
+}
+.modal-confirm .close:hover {
+	opacity: 0.8;
+}
+.modal-confirm .icon-box {
+	color: #fff;
+	width: 95px;
+	height: 95px;
+	display: inline-block;
+	border-radius: 50%;
+	z-index: 9;
+	border: 5px solid #fff;
+	padding: 15px;
+	text-align: center;
+}
+.modal-confirm .icon-box i {
+	font-size: 64px;
+	margin: -4px 0 0 -4px;
+}
+.modal-confirm.modal-dialog {
+	margin-top: 80px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #eeb711 !important;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	border-radius: 30px;
+	margin-top: 10px;
+	padding: 6px 20px;
+	border: none;
+}
+.modal-confirm .btn:hover, .modal-confirm .btn:focus {
+	background: #eda645 !important;
+	outline: none;
+}
+.modal-confirm .btn span {
+	margin: 1px 3px 0;
+	float: left;
+}
+.modal-confirm .btn i {
+	margin-left: 1px;
+	font-size: 20px;
+	float: right;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
+
+.card-block {
+    font-size: 1em;
+    position: relative;
+    margin: 0;
+    padding: 1em;
+    border: none;
+    box-shadow: none;
+
+}
+.card {
+    font-size: 1em;
+    overflow: hidden;
+    padding: 5;
+    border: 1;
+}
+
+.carousel-indicators li {
+    border-radius: 12px;
+    width: 12px;
+    height: 12px;
+    background-color: #404040;
+}
+.carousel-indicators li {
+    border-radius: 12px;
+    width: 12px;
+    height: 12px;
+    background-color: #404040;
+}
+.carousel-indicators .active {
+    background-color: white;
+    max-width: 12px;
+    margin: 0 3px;
+    height: 12px;
+}
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+
+.btn {
+  margin-top: auto;
+}
+.modal-open{
+  padding:0 !important;
+  overflow-y: auto;
+ }
+body:not(.modal-open){
+  padding-right: 0px !important;
+}
+
+.card .tab-content{
+	padding: 1rem 0 0 0;
+}
+
+.z-depth-3 {
+    -webkit-box-shadow: 0 11px 7px 0 rgba(0,0,0,0.19),0 13px 25px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 11px 7px 0 rgba(0,0,0,0.19),0 13px 25px 0 rgba(0,0,0,0.3);
+}
+
+body{
+color: #1a202c;
+text-align: left;
+background-color: #e2e8f0;
+}
+
+.profile-card-4 .user-box {
+    width: 110px;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+
+.profile-card-4 .list-icon {
+    display: table-cell;
+    font-size: 30px;
+    padding-right: 20px;
+    vertical-align: middle;
+    color: #3d3d3d;
+}
+
+.profile-card-4 .list-details {
+	display: table-cell;
+	vertical-align: middle;
+    color: #223035;
+    font-size: 15px;
+    line-height: 15px;
+}
+
+.profile-card-4 .list-details small{
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 12px;
+	font-weight: 400;
+    color: #808080;
+}
+
+.list-group-item:hover{
+	color: #fff;
+	background: #f0f0f0 !important;
+}
+.selected{
+	color: #fff;
+	background: #f0f0f0 !important;
+}
+
+
+
+
+
+</style>
+{% endblock head %}
+{% block content %}
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="profile-card-4 z-depth-3">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="list-group shadow-none">
+                            <a href="{% url 'profile'%}" style="text-decoration:none;">
+                                <li class="list-group-item" style="border:none; background:#fafafa; margin:2px;">
+                                    <div class="list-icon">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span>Your Profile</span>
+                                    </div>
+                                </li>
+                            </a>
+                              <a href="{% url 'pshelf'%}" style="text-decoration:none;">
+                                <li class="list-group-item selected"
+                                    style="border:none; background:#fafafa; margin:2px;">
+                                    <div class="list-icon">
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span>Your Personal Shelf</span>
+                                    </div>
+                                </li>
+                            </a>
+
+                            <a href="{% url 'booksonhold'%}" style="text-decoration:none;">
+                                <li class="list-group-item" style="border:none; background:#fafafa; margin:2px;">
+                                    <div class="list-icon">
+                                        <i class="fa fa-shopping-bag"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span>Books on Hold</span>
+                                    </div>
+                                </li>
+                            </a>
+
+                            <a href="{% url 'booksonloan'%}" style="text-decoration:none;">
+                                <li class="list-group-item" style="border:none; background:#fafafa; margin:2px;">
+                                    <div class="list-icon">
+                                        <i class="fa fa-bullhorn"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span>Books on Loan</span>
+
+                                    </div>
+                                </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card z-depth-3">
+                <div class="card-body">
+                    <!-- Card Start -->
+                    {% if book|length == 0 %}
+                    <section>
+                        <div class="container" style="text-align:center; margin-top:20px; padding:60px;">
+                            <img src="/static/images/wishlist-empty.png" style="margin-bottom:20px;">
+                            <h3>Ooops! It's Empty</h3>
+                            <p>Looks like you don't have anything in your personal shelf</p>
+                        </div>
+                    </section>
+                    <br>
+                    {% else %}
+                    {% for x in book %}
+                    <a href="/library/book/{{x.id}}" style="text-decoration:none; color:#403f3c; font-size:1em;" >
+                        <div class="card" style="width: 100%; margin-bottom:10px; border:1; border-radius:0px;">
+                            <div class="row">
+                                <div class="col-md-7" style="margin-right:-50px;">
+                                    <div class="card-block ">
+                                        <article class="card-body p-1">
+                                            <h3 class="title mb-3">{{x.title}}</h3>
+                                            <p class="price-detail-wrap">
+                                            <span class="price h4 text-warning">
+                                                <span class="num">{{x.author}}</span>
+                                            </span>
+                                            </p> <!-- price-detail-wrap .// -->
+                                            <dl class="item-property">
+                                                <dt>Year of publication</dt>
+                                                <dd><p>{{x.year_of_publication}} </p></dd>
+                                            </dl>
+                                            <dl class="param param-feature">
+                                                <dt>Current Status</dt>
+                                                <dd>{{x.current_status}}</dd>
+                                            </dl>  <!-- item-property-hor .// -->
+
+                                            <a href="/library/book/{{x.id}}"
+                                               class="btn btn-lg btn-primary text-uppercase"
+                                               style="background: #FE980F;border: none;"><i
+                                                    class="fa fa-book"></i>Explore</a>
+                                            <form action="/pshelf/{{x.id}}" method="post" style="display:inline;">
+                                                {% csrf_token %}
+
+                                                <button class="btn btn-lg btn-primary text-uppercase"
+                                                        style="background: #dc3545;border: none; font-color:'white'"><i
+                                                        class="fa fa-trash"></i> Delete
+                                                </button>
+                                            </form>
+                                        </article>
+                                    </div>
+                                </div>
+                                <!-- Carousel start -->
+                                <div class="col-md-5 d-flex align-items-center justify-content-center" style="text-align:center; margin:auto;">
+                                    <a href="/buy/product/{{x.id}}">
+                                        <img class="d-block" src='/media/{{x.Img1}}' alt=""
+                                             style="max-height:300px; height:auto; max-width:300px; ">
+                                    </a>
+                                </div>
+                                <!-- End of carousel -->
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
