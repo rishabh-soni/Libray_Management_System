@@ -9,3 +9,8 @@ class CustomUser(AbstractUser):
     unpaid_fines = models.IntegerField(default=0)
     is_faculty = models.BooleanField(default=0)
     books_withdrawn = models.IntegerField(default=0)
+
+
+class Friends(models.Model):
+    id1 = models.IntegerField()
+    id2 = models.IntegerField()

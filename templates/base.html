@@ -377,16 +377,17 @@ $(document).on("click", ".action-buttons .dropdown-menu", function(e){
                     <a href="/library/category/others" class="dropdown-item">Others</a>
                 </div>
             </div>
-            <!--<a href=""
-               class="nav-item nav-link {% if request.path == '/aboutus/' %} active {% endif %} ">About</a>
+            <a href="{% url 'contactus' %}"
+               class="nav-item nav-link {% if request.path == '/contact-us/' %} active {% endif %} ">Library Location</a>
+            <a href="{% url 'following' %}"
+               class="nav-item nav-link {% if request.path == '/following/' %} active {% endif %} ">Following</a>
 
-            <a href=""
+            <!--<a href=""
                class="nav-item nav-link {% if request.path == '/sell/' %} active {% endif %} ">Sell</a>
-            <a href=""
-               class="nav-item nav-link {% if request.path == '/contact-us/' %} active {% endif %} ">Contact us</a>-->
+            -->
 
         </div>
-        <form class="navbar-form form-inline" method="post" action="/buy/search/">
+        <form class="navbar-form form-inline" method="post" action="/search/">
             {% csrf_token %}
             <div class="input-group search-box">
                 <input type="text" id="search" name="search" class="form-control" placeholder="Search here...">
@@ -428,35 +429,18 @@ $(document).on("click", ".action-buttons .dropdown-menu", function(e){
     <div class="jumbotron jumbotron-fluid bg-grey p-4 mt-5 mb-0">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 cizgi">
                     <div class="card bg-grey border-0">
                         <div class="card-body text-center">
-                            <h5 class="card-title text-white display-4" style="font-size:25px">Get in Touch</h5>
-                            <a class="text-light d-block lead" href=""><i
-                                    class="fa fa-info mr-2" style="color:#FE980F;"></i>About Us</a>
-                            <a class="text-light d-block lead" href=""><i
-                                    class="fa fa-envelope mr-2" style="color:#FE980F;"></i>Contact Us</a>
+                            <h5 class="card-title text-white display-4" style="font-size:25px">Quick Links</h5>
+                            <a class="text-light d-block lead" href="/library/category/all"><i
+                                    class="fa fa-book mr-2" style="color:#FE980F;"></i>Browse Books</a>
+                            <a class="text-light d-block lead" href="{% url 'contactus' %}"><i
+                                    class="fa fa-envelope mr-2" style="color:#FE980F;"></i>Find an Offline Library</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 cizgi">
-                    <div class="card bg-grey border-0">
-                        <div class="card-body text-center">
-                            <h5 class="card-title text-white display-4" style="font-size:25px">Follow Us</h5>
-                            <a href="https://www.youtube.com/watch?v=DX1PoINAlD4&t=707s" target="_blank"><i
-                                    class="fa fa-youtube-square fa-fw fa-2x" style="color:#FE980F;"></i></a>
-
-                            <!--<a class="text-light" href="#"><i class="fa fa-facebook-square fa-fw fa-2x"
-                                                              style="color:#FE980F;"></i></a>
-
-                            <a class="text-light" href="#"><i class="fa fa-instagram fa-fw fa-2x"
-                                                              style="color:#FE980F;"></i></a>-->
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 ">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 ">
                     <div class="card bg-grey border-0">
                         <div class="" style="text-align:center"><br>
                             <img src="/static/images/icons/logo_white2.png" style="width:48%; margin-top:-20px;">

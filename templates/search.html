@@ -23,10 +23,11 @@ Search Results
 
 
 
+
 </style>
 {% endblock head %}
 {% block content %}
-{% if products|length > 0 %}
+{% if books|length > 0 or users|length > 0 %}
 <br>
 <section>
     <div class="container">
@@ -34,158 +35,145 @@ Search Results
             <div class="col-sm-3">
                 <div class="left-sidebar">
                     <h2>Category</h2>
-                    <div class="panel-group category-products" id="accordian"><!--category-books-->
+                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="/buy/category/all">All Categories</a></h4>
+                                <h4 class="panel-title"><a href="/library/category/all">All Categories</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="/buy/category/books">Books/Notes</a></h4>
+                                <h4 class="panel-title"><a href="/library/category/fiction">Fiction</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="/buy/category/household">Household</a></h4>
+                                <h4 class="panel-title"><a href="/library/category/business">Business</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="/buy/category/electronics">Electronics</a></h4>
+                                <h4 class="panel-title"><a href="/library/category/biography">Biography</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="/buy/category/stationery">Stationery/Equipments</a>
-                                </h4>
+                                <h4 class="panel-title"><a href="/library/category/science">Science</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="/buy/category/sports">Sports, Fitness and Outdoors</a>
-                                </h4>
+                                <h4 class="panel-title"><a href="/library/category/literature">Library</a></h4>
                             </div>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title"><a href="/buy/category/others">Others</a></h4>
+                                <h4 class="panel-title"><a href="/library/category/others">Others</a></h4>
                             </div>
                         </div>
-                    </div><!--/category-books-->
-
-                    <!--<div class="price-range">
-                        <h2>Price Range</h2>
-                        <div class="well text-center">
-                            <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600"
-                                   data-slider-step="5" data-slider-value="[250,450]" id="sl2"><br/>
-                            <b class="pull-left">$ 0</b> <b class="pull-right">$ 600</b>
-                        </div>
-                    </div>-->
-
+                    </div>
                 </div>
             </div>
 
             <div class="col-sm-9 padding-right">
-
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title">{{products|length}} Search results for "{{search}}"</h2>
-                    {% for x in products %}
+                    <h2 class="title"  style="text-align: center;">{{books|length}} Books found for "{{search}}"</h2>
+                    {% for x in books %}
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
                             <div class="single-products">
                                 <div class="productinfo text-center">
                                     <div style="height:300px;"><a
-                                            href="/buy/product/{{x.id}} "><img src="/media/{{ x.Img1 }}"
-                                                                               alt="" class="card-img-top"
-                                                                               style="width:auto max-height:300px; display: block; position: relative; top: 50%;transform: translateY(-50%);max-width:220px; margin-left: auto; margin-right: auto; margin-top:10px;"/></a>
+                                            href="/library/book/{{x.id}} "><img src="/media/{{ x.Img1 }}"
+                                                                                alt="" class="card-img-top"
+                                                                                style="width:auto max-height:300px; display: block; position: relative; top: 50%;transform: translateY(-50%);max-width:220px; margin-left: auto; margin-right: auto; margin-top:10px;"/></a>
                                     </div>
-                                    <h2>₹{{x.price}}</h2>
-                                    <p>{{x.name}}</p>
-                                    <a href="/buy/product/{{x.id}}" class="btn btn-default add-to-cart"><i
-                                            class="fa fa-shopping-cart"></i>Buy Now
+                                    <h2>{{x.author}}</h2>
+                                    <p>{{x.title}}</p>
+                                    <a href="/library/book/{{x.id}}" class="btn btn-default add-to-cart"><i
+                                            class="fa fa-book"></i>Explore
                                     </a>
                                 </div>
                             </div>
 
-                          <!--  <div class="choose" style="width:100%; text-align:center;">
-                                <form action="/wishlist/{{x.id}}" method="post" style="display:inline">
-                                    {% csrf_token %}
-                                    {% if x.id in ids %}
-                                    <button type="submit" class="btn"><i
-                                            class="fa fa-trash"></i> Remove from wishlist
-                                    </button>
-                                    {% else %}
-                                    <button type="submit" class="btn"><i
-                                            class="fa fa-plus-square"></i> Add to wishlist
-                                    </button>
-                                    {% endif %}
-                                </form>
-                            </div>-->
+                            <!--  <div class="choose" style="width:100%; text-align:center;">
+                                  <form action="/wishlist/{{x.id}}" method="post" style="display:inline">
+                                      {% csrf_token %}
+                                      {% if x.id in ids %}
+                                      <button type="submit" class="btn"><i
+                                              class="fa fa-trash"></i> Remove from wishlist
+                                      </button>
+                                      {% else %}
+                                      <button type="submit" class="btn"><i
+                                              class="fa fa-plus-square"></i> Add to wishlist
+                                      </button>
+                                      {% endif %}
+                                  </form>
+                              </div>-->
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <h2 class="title" style="text-align: center;">{{users|length}} Users found for "{{search}}"</h2>
+                    {% for x in users %}
+                    <div class="col-lg-4">
+                        <div class="profile-card-4 z-depth-3">
+                            <div class="card">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <br>
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                         class="rounded-circle"
+                                         width="150">
+                                    <div class="mt-3">
+                                        <h4>{{x.full_name}}</h4>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group shadow-none">
+                                        <li class="list-group-item">
+                                            <div class="list-icon">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+                                            <div class="list-details">
+                                                <span>{{x.username}}</span>
+                                                <small>Username</small>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <div class="list-icon">
+                                                <i class="fa fa-envelope"></i>
+                                            </div>
+                                            <div class="list-details">
+                                                <span>{{x.email}}</span>
+                                                <small>Email Address</small>
+                                            </div>
+                                        </li>
+                                        <a href="/pshelf/user/{{x.id}}" style="text-decoration:none;">
+                                            <li class="list-group-item">
+                                                <div class="list-icon">
+                                                    <i class="fa fa-book"></i>
+                                                </div>
+                                                <div class="list-details">
+                                                    <span>Browse his Personal Shelf</span>
+                                                </div>
+                                            </li>
+                                        </a>
+                                        {% if x.id in following %}
+                                        <a href="/unfollow/{{x.id}}"
+                                           class="btn btn-lg btn-primary text-uppercase"
+                                           style="background: #FE980F;border: none;">Unfollow</a>
+                                        {% else %}
+                                        <a href="/follow/{{x.id}}"
+                                           class="btn btn-lg btn-primary text-uppercase"
+                                           style="background: #FE980F;border: none;"><i class="fa fa-user-plus"></i>
+                                            Follow</a>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
                 </div><!--features_items-->
-
-                <div class="recommended_items"><!--recommended_items-->
-                    <h2 class="title text-center">recommended items</h2>
-
-                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                {% for y in reco1 %}
-                                <div class="col-sm-4" style="margin-top:20px;">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="/media/{{ y.Img1 }}" alt="" class="card-img-top"
-                                                     style="width:auto; height:150px;display: block; max-width:250px;
-                                                          margin-left: auto;
-                                                          margin-right: auto; margin-top:10px;"/>
-                                                <h2>₹{{y.price}}</h2>
-                                                <p>{{y.name}}</p>
-                                                <a href="/buy/product/{{y.id}}" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Buy Now
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            <div class="item">
-                                {% for y in reco2 %}
-                                <div class="col-sm-4" style="margin-top:20px;">
-                                    <div class="product-image-wrapper">
-                                        <div class="single-products">
-                                            <div class="productinfo text-center">
-                                                <img src="/media/{{ y.Img1 }}" alt="" class="card-img-top"
-                                                     style="width:auto; height:150px;display: block; max-width:250px;
-                                                          margin-left: auto;
-                                                          margin-right: auto; margin-top:10px;"/>
-                                                <h2>₹{{y.price}}</h2>
-                                                <p>{{y.name}}</p>
-                                                <a href="/buy/product/{{y.id}}" class="btn btn-default add-to-cart"><i
-                                                        class="fa fa-shopping-cart"></i>Buy Now
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                        </div>
-                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-                </div><!--/recommended_items-->
-
             </div>
         </div>
     </div>

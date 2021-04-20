@@ -21,13 +21,14 @@ def book(request, myid):
     reviews = Reviews.objects.filter(isbn_number=book.isbn_number)
     books_isued = Loan.objects.filter(username=user.username)
     no_of_books = len(books_isued)
-    is_invalid=0
-    if user.is_faculty==0 and no_of_books>3 and user.unpaid_fines>1000:
-        is_invalid=1
+    is_invalid = 0
+    if user.is_faculty == 0 and no_of_books > 3 and user.unpaid_fines > 1000:
+        is_invalid = 1
     ids = list()
     for item in shelf_list:
         ids.append(item.bid)
-    return render(request, 'item.html', {'book': book, 'ids': ids, 'loan_info': loan_info, 'reviews': reviews, 'is_invalid':is_invalid})
+    return render(request, 'item.html',
+                  {'book': book, 'ids': ids, 'loan_info': loan_info, 'reviews': reviews, 'is_invalid': is_invalid})
 
 
 def pshelf(request):
@@ -39,6 +40,17 @@ def pshelf(request):
         ids.append(item.bid)
     book = Books.objects.filter(id__in=ids)
     return render(request, 'pshelf.html', {'pshelf': shelf_list, 'book': book})
+
+
+def user_pshelf(request, id):
+    user = request.user
+    username = CustomUser.objects.filter(id=id).first()
+    shelf_list = PShelf.objects.filter(username=username)
+    ids = list()
+    for item in shelf_list:
+        ids.append(item.bid)
+    book = Books.objects.filter(id__in=ids)
+    return render(request, 'user_pshelf.html', {'pshelf': shelf_list, 'book': book})
 
 
 def create_pshelf(request, pid):
@@ -196,6 +208,60 @@ def review(request, bid):
         form = Review()
         book = Books.objects.filter(id=bid).first()
         return render(request, 'review.html', {'form': form, 'book': book})
+
+
+def search(request):
+    user = request.user
+    if request.method == 'POST':
+        search = request.POST['search']
+        tempb = list()
+        users = list()
+        words = search.split()
+        for x in words:
+            tempb += Books.objects.filter(title__icontains=x).filter(current_status='on-shelf') | Books.objects.filter(
+                author__icontains=x).filter(current_status='on-shelf') | Books.objects.filter(
+                category__icontains=x).filter(current_status='on-shelf')
+            tempb += Books.objects.filter(title__icontains=x).filter(current_status='on-loan') | Books.objects.filter(
+                author__icontains=x).filter(current_status='on-loan') | Books.objects.filter(
+                category__icontains=x).filter(current_status='on-loan')
+            users += CustomUser.objects.filter(full_name__icontains=x) | CustomUser.objects.filter(
+                username__icontains=x)
+        wish_list = PShelf.objects.filter(username=user.username)
+        following_info = Friends.objects.filter(id1=user.id)
+        following = list()
+        for x in following_info:
+            following.append(x.id2)
+        books = list()
+        x = 0
+        while x < len(tempb):
+            current_isbn = tempb[x].isbn_number
+            flag = 0
+            while tempb[x].isbn_number == current_isbn:
+                if tempb[x].current_status == 'on-shelf' and flag == 0:
+                    books.append(tempb[x])
+                    flag = 1
+                elif tempb[x].current_status == 'on-loan' and flag == 0:
+                    curr_date = datetime.now(timezone.utc)
+                    loan_info = Loan.objects.all().filter(bid=tempb[x].id).first()
+                    ret_date = loan_info.return_date
+                    dt = ret_date - curr_date
+                    if user.is_faculty:
+                        flag = 1
+                        books.append(tempb[x])
+                    else:
+                        if dt.days <= 10:
+                            flag = 1
+                            books.append(tempb[x])
+                x += 1
+                if x == len(tempb):
+                    break
+        ids = list()
+
+        for item in wish_list:
+            ids.append(item.bid)
+        return render(request, 'search.html',
+                      {'books': books, 'ids': ids, 'search': search, 'users': users, 'following': following})
+    return render(request, 'search.html')
 
 
 """

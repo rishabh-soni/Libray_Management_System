@@ -230,61 +230,7 @@ background-color: #e2e8f0;
 {% block content %}
 <div class="container" style="margin-top:20px;">
     <div class="row">
-        <div class="col-lg-4">
-            <div class="profile-card-4 z-depth-3">
-                <div class="card">
-                    <div class="card-body">
-                        <ul class="list-group shadow-none">
-                            <a href="{% url 'profile'%}" style="text-decoration:none;">
-                                <li class="list-group-item" style="border:none; background:#fafafa; margin:2px;">
-                                    <div class="list-icon">
-                                        <i class="fa fa-user"></i>
-                                    </div>
-                                    <div class="list-details">
-                                        <span>Your Profile</span>
-                                    </div>
-                                </li>
-                            </a>
-                              <a href="{% url 'pshelf'%}" style="text-decoration:none;">
-                                <li class="list-group-item selected"
-                                    style="border:none; background:#fafafa; margin:2px;">
-                                    <div class="list-icon">
-                                        <i class="fa fa-heart"></i>
-                                    </div>
-                                    <div class="list-details">
-                                        <span>Your Personal Shelf</span>
-                                    </div>
-                                </li>
-                            </a>
-
-                            <a href="{% url 'booksonhold'%}" style="text-decoration:none;">
-                                <li class="list-group-item" style="border:none; background:#fafafa; margin:2px;">
-                                    <div class="list-icon">
-                                        <i class="fa fa-shopping-bag"></i>
-                                    </div>
-                                    <div class="list-details">
-                                        <span>Books on Hold</span>
-                                    </div>
-                                </li>
-                            </a>
-
-                            <a href="{% url 'booksonloan'%}" style="text-decoration:none;">
-                                <li class="list-group-item" style="border:none; background:#fafafa; margin:2px;">
-                                    <div class="list-icon">
-                                        <i class="fa fa-bullhorn"></i>
-                                    </div>
-                                    <div class="list-details">
-                                        <span>Books on Loan</span>
-
-                                    </div>
-                                </li>
-                            </a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card z-depth-3">
                 <div class="card-body">
                     <!-- Card Start -->
@@ -293,7 +239,7 @@ background-color: #e2e8f0;
                         <div class="container" style="text-align:center; margin-top:20px; padding:60px;">
                             <img src="/static/images/wishlist-empty.png" style="margin-bottom:20px;">
                             <h3>Ooops! It's Empty</h3>
-                            <p>Looks like you don't have anything in your personal shelf</p>
+                            <p>Looks like he doesn't have anything in his personal shelf</p>
                         </div>
                     </section>
                     <br>
@@ -324,14 +270,6 @@ background-color: #e2e8f0;
                                                class="btn btn-lg btn-primary text-uppercase"
                                                style="background: #FE980F;border: none;"><i
                                                     class="fa fa-book"></i>Explore</a>
-                                            <form action="/pshelf/{{x.id}}" method="post" style="display:inline;">
-                                                {% csrf_token %}
-
-                                                <button class="btn btn-lg btn-primary text-uppercase"
-                                                        style="background: #dc3545;border: none; font-color:'white'"><i
-                                                        class="fa fa-trash"></i> Delete
-                                                </button>
-                                            </form>
                                         </article>
                                     </div>
                                 </div>
