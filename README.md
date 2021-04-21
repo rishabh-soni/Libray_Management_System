@@ -1,11 +1,6 @@
 
-<a href="https://honeycombiiti.pythonanywhere.com"><img alt="![Unable to load image]" src="https://github.com/rishabh-soni/Online_Resource_Sharing_Platform/blob/master/static/images/logohorizontal.png?raw=true"></a>
+![Unable to load image](https://github.com/rishabh-soni/Online_Resource_Sharing_Platform/blob/master/static/images/logohorizontal.png?raw=true)
 ## Online Resource Sharing Platform
-
-HoneyComb is an interactive platform for buying, selling, and renting any students' resources within the IITI community. The web application's closure to IITI students would provide a better platform for students to share their belongings. Students can sell or rent their notes, books, stationeries, furniture, and much more.
-The project is made using **django** while **MySQL** is used for database management.
-
-Visit our website [here](https://honeycombiiti.pythonanywhere.com) or alternatively by clicking on the link https://honeycombiiti.pythonanywhere.com
 
 ## Project Requirements (for local hosting)
 * Python 3.8
