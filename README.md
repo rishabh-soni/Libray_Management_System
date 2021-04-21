@@ -1,6 +1,7 @@
 
-![Unable to load image](https://github.com/rishabh-soni/Online_Resource_Sharing_Platform/blob/master/static/images/logohorizontal.png?raw=true)
-## Online Resource Sharing Platform
+![Unable to load image](https://github.com/rishabh-soni/Library_Management_System/blob/master/static/images/logohorizontal.png?raw=true)
+## HoneyComb Library Management System
+This is an interactive web application to manage an offline Library.
 
 ## Project Requirements (for local hosting)
 * Python 3.8
