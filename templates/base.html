@@ -381,8 +381,8 @@ $(document).on("click", ".action-buttons .dropdown-menu", function(e){
                class="nav-item nav-link {% if request.path == '/contact-us/' %} active {% endif %} ">Library Location</a>
             <a href="{% url 'following' %}"
                class="nav-item nav-link {% if request.path == '/following/' %} active {% endif %} ">Following</a>
-            <a href="{% url 'rules' %}"
-               class="nav-item nav-link {% if request.path == '/rules/' %} active {% endif %} ">Rules</a>
+            <!--<a href="{% url 'rules' %}"
+               class="nav-item nav-link {% if request.path == '/rules/' %} active {% endif %} ">Rules</a>-->
 
         </div>
         <form class="navbar-form form-inline" method="post" action="/search/">
