@@ -496,6 +496,15 @@ background-color: #e2e8f0;
                                     <small>Unpaid Fines</small>
                                 </div>
                             </li>
+                            <li class="list-group-item">
+                                <div class="list-icon">
+                                    <i class="fa fa-users"></i>
+                                </div>
+                                <div class="list-details">
+                                    <span>{% if user.is_faculty %}Faculty{% else %}Student{% endif %}</span>
+                                    <small>Privileges</small>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                     <!--<div class="card-footer text-center">

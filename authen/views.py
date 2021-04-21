@@ -213,11 +213,11 @@ def resend(request, username):
     sendConfirm(user)
     return render(request, 'link_sent.html', {'username': user.username})
 
-"""
-def aboutus(request):
+
+def rules(request):
     user = request.user
-    return render(request, 'aboutus.html')
-"""
+    return render(request, 'rules.html')
+
 
 def contactus(request):
     user = request.user

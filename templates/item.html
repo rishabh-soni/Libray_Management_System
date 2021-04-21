@@ -219,8 +219,9 @@ function myFunction(){
                     {% else %}
                     {% if user.is_authenticated %}
                     {% if is_invalid %}
-                    <a href="#myModal1" class="btn btn-lg btn-primary text-uppercase"
-                       style="background: #FE980F;border: none; " data-toggle="modal" disabled>Keep on Hold</a>
+                    <button class="btn btn-lg btn-primary text-uppercase"
+                            style="background: #FE980F;border: none; " disabled>Keep on Hold
+                    </button>
                     {% else %}
                     <a href="#myModal1" class="btn btn-lg btn-primary text-uppercase"
                        style="background: #FE980F;border: none; " data-toggle="modal">Keep on Hold</a>
@@ -230,7 +231,7 @@ function myFunction(){
                        style="background: #FE980F;border: none; " data-toggle="modal">Keep on Hold</a>
                     {% endif %}
                     {% if user.is_authenticated %}
-                    {% if x.id not in ids %}
+                    {% if book.id not in ids %}
                     <a href="/pshelf/{{book.id}}" class="btn btn-lg btn-primary text-uppercase"
                        style="background: #dc3545;border: none; font-color:'white'"> <i
                             class="fa fa-heart-o"></i> Add to Your Shelf</a>

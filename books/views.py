@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.db.models import Count
 import datetime, pytz
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 
 def book(request, myid):
@@ -22,9 +22,10 @@ def book(request, myid):
     books_isued = Loan.objects.filter(username=user.username)
     no_of_books = len(books_isued)
     is_invalid = 0
-    if user.is_faculty == 0 and no_of_books > 3 and user.unpaid_fines > 1000:
+    if (user.is_faculty == 0 and no_of_books > 3) or (user.is_faculty == 0 and user.unpaid_fines > 1000):
         is_invalid = 1
     ids = list()
+    print(is_invalid)
     for item in shelf_list:
         ids.append(item.bid)
     return render(request, 'item.html',
@@ -137,8 +138,8 @@ def hold(request, myid):
             bookname = book.title
             isbn = book.isbn_number
             copy = book.copy_number
-            hold_date = datetime.datetime.now()
-            hold_limit = hold_date + datetime.timedelta(days=10)
+            hold_date = datetime.now()
+            hold_limit = hold_date + timedelta(days=10)
             if user.is_faculty:
                 holdr = Hold(username=user.username, bid=book.id, isbn_number=isbn, copy_number=copy, title=bookname,
                              hold_date=hold_date)
