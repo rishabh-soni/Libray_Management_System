@@ -22,7 +22,7 @@ def book(request, myid):
     books_isued = Loan.objects.filter(username=user.username)
     no_of_books = len(books_isued)
     is_invalid = 0
-    if (user.is_faculty == 0 and no_of_books > 3) or (user.is_faculty == 0 and user.unpaid_fines > 1000):
+    if (user.is_faculty == 0 and no_of_books >= 3) or (user.is_faculty == 0 and user.unpaid_fines > 1000):
         is_invalid = 1
     ids = list()
     print(is_invalid)
